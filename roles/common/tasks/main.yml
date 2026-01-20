@@ -1,0 +1,5 @@
+# 모든 서버에 적용되는 기초작업
+- name: APT 캐시 업데이트 ( 패키지 설치 에러 방지 )
+  apt:
+    update_cache: yes
+    cache_valid_time: 7200

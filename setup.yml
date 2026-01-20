@@ -1,0 +1,33 @@
+- name: 프로젝트 기초 구조 생성
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: 롤(Role) 및 변수 디렉토리 생성
+      file:
+        path: "{{ item }}"
+        state: directory
+      loop:
+        - group_vars/all
+        - roles/common/tasks
+        - roles/mariadb/tasks
+        - roles/mariadb/templates
+        - roles/nginx/tasks
+        - roles/nginx/templates
+        - roles/webapp/tasks
+        - roles/webapp/templates
+
+    - name: 빈 파일 생성(이후 내용을 채워넣음)
+      file:
+        path: "{{ item }}"
+        state: touch
+      loop:
+        - inventory,ini
+        - site.yml
+        - group_vars/all/vault.yml
+        - roles/common/tasks/main.yml
+        - roles/mariadb/tasks/main.yml
+        - roles/nginx/tasks/main.yml
+        - roles/nginx/templates/default.j2
+        - roles/webapp/tasks/main.yml
+        - roles/webapp/templates/index.php.j2
